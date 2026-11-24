@@ -1,0 +1,9 @@
+services:
+  motd:
+    build: .
+    init: true
+    ports:
+      - "${BIND_IP:-127.0.0.1}:25566:25565/tcp"
+    volumes:
+      - ./assets:/app:ro
+      - ./data:/data

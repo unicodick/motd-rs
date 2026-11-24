@@ -1,0 +1,36 @@
+{
+  "listen": "0.0.0.0:25565",
+  "version_name": "attempts: {attempt}",
+  "version_display": "compatible",
+  "icon": "server-icon.png",
+  "motd": {
+    "text": "motd-rs",
+    "color": "#5AD9C8",
+    "bold": true,
+    "italic": false,
+    "underlined": true,
+    "strikethrough": false,
+    "obfuscated": false,
+    "extra": [
+      {
+        "text": "\nconnection attempts: {attempt}",
+        "color": "gray",
+        "bold": false,
+        "italic": true,
+        "underlined": false
+      }
+    ]
+  },
+  "sample": ["connection attempts: {attempt}"],
+  "disconnect": {
+    "text": "hi, {player}!",
+    "color": "yellow",
+    "extra": [
+      {
+        "text": "\nthis server only displays a status message.",
+        "color": "gray",
+        "extra": [{ "text": "\nconnection attempt: {attempt}", "color": "aqua" }]
+      }
+    ]
+  }
+}
