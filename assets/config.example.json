@@ -1,36 +1,54 @@
 {
   "listen": "0.0.0.0:25565",
-  "version_name": "attempts: {attempt}",
   "version_display": "compatible",
+  "version_name": "attempts: {attempt}",
   "icon": "server-icon.png",
+
   "motd": {
     "text": "motd-rs",
     "color": "#5AD9C8",
     "bold": true,
     "italic": false,
-    "underlined": true,
+    "underlined": false,
     "strikethrough": false,
     "obfuscated": false,
+    "shadow_color": -16777216,
     "extra": [
-      {
-        "text": "\nconnection attempts: {attempt}",
-        "color": "gray",
-        "bold": false,
-        "italic": true,
-        "underlined": false
-      }
+      { "text": "\nconnection attempts: {attempt}", "color": "gray", "bold": false, "italic": true }
     ]
   },
-  "sample": ["connection attempts: {attempt}"],
-  "disconnect": {
-    "text": "hi, {player}!",
-    "color": "yellow",
+
+  "motd_sprites": {
+    "text": "motd-rs ",
+    "color": "#5AD9C8",
+    "shadow_color": [0.0, 0.1, 0.12, 1.0],
     "extra": [
-      {
-        "text": "\nthis server only displays a status message.",
-        "color": "gray",
-        "extra": [{ "text": "\nconnection attempt: {attempt}", "color": "aqua" }]
-      }
+      { "atlas": "minecraft:blocks", "sprite": "minecraft:block/sea_lantern" }
     ]
-  }
+  },
+
+  "motd_banner": {
+    "text": "",
+    "extra": [
+      { "player": { "name": "jeb_" }, "hat": true },
+      " ",
+      {
+        "player": {
+          "properties": [
+            {
+              "name": "textures",
+              "value": "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHBzOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2E4YTA2MmE2M2M1NTlkYTNhZjA3NjljNWJhODI2YWRlNzhhMWNjY2QyYWNiZDE5ZjNjMmY3MWQ0MGI2OGY2ODEifX19"
+            }
+          ]
+        },
+        "hat": false,
+        "color": "white",
+        "shadow_color": 0
+      },
+      { "text": " motd-rs", "color": "#5AD9C8" }
+    ]
+  },
+
+  "sample": ["connection attempts: {attempt}"],
+  "disconnect": "hi, {player}! connection attempt: {attempt}"
 }

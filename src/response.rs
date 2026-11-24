@@ -6,6 +6,9 @@ use serde_json::json;
 use crate::config::{Config, VersionDisplay};
 use crate::protocol::{self, DEFAULT_STATUS_PROTOCOL, MIN_PROTOCOL};
 
+const SPRITE_PROTOCOL: i32 = 773; // 1.21.9
+const LAST_HEAD_PROTOCOL: i32 = 774; // 1.21.11
+
 pub(crate) struct Responses {
     config: Config,
     icon: String,
@@ -16,6 +19,12 @@ impl Responses {
         let responses = Self { config, icon };
 
         responses.status(i32::MAX, i32::MAX)?;
+        if responses.config.motd_sprites.is_some() {
+            responses.status(i32::MAX, SPRITE_PROTOCOL - 1)?;
+        }
+        if responses.config.motd_banner.is_some() {
+            responses.status(i32::MAX, LAST_HEAD_PROTOCOL)?;
+        }
         responses.disconnect(i32::MAX, &"\0".repeat(16))?;
         Ok(responses)
     }
@@ -28,7 +37,14 @@ impl Responses {
             VersionDisplay::Label => -1,
         };
         let attempt = attempts.to_string();
-        let mut motd = config.motd.clone();
+        let motd = match client {
+            SPRITE_PROTOCOL..=LAST_HEAD_PROTOCOL => {
+                config.motd_banner.as_ref().or(config.motd_sprites.as_ref())
+            }
+            SPRITE_PROTOCOL.. => config.motd_sprites.as_ref(),
+            _ => None,
+        };
+        let mut motd = motd.unwrap_or(&config.motd).clone();
         motd.fill(&attempt, None);
         let sample: Vec<_> = config
             .sample
